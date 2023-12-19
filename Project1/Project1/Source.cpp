@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 #include "Football.h"
 #include "Movie.h"
@@ -58,6 +59,17 @@ void operator>>(istream& console, Football& football) {
 	else {
 		cout << "No such Place";
 		exit(EXIT_FAILURE);
+	}
+	ofstream outputBinaryFile("FootballData.bin", ios::out | ios::binary | ios::app);
+
+	if (outputBinaryFile.is_open()) {
+		outputBinaryFile.write(reinterpret_cast<char*>(&football.stand), sizeof(int));
+		outputBinaryFile.write(reinterpret_cast<char*>(&football.row), sizeof(int));
+		outputBinaryFile.write(reinterpret_cast<char*>(&football.place), sizeof(int));
+		for (int i = 0; i < 1; i++) {
+			outputBinaryFile.write(football.supportingTeam, strlen(football.supportingTeam)+1);
+		}
+		outputBinaryFile.close();
 	}
 }
 
@@ -155,6 +167,18 @@ void operator>>(istream& console, Movie& movie) {
 			}
 		}
 	}
+	ofstream outputBinaryFile("MovieData.bin", ios::out | ios::binary | ios::app);
+
+	if (outputBinaryFile.is_open()) {
+		outputBinaryFile.write(movie.type.c_str(), movie.type.size() + 1);
+		outputBinaryFile.write(reinterpret_cast<char*>(&movie.row), sizeof(int));
+		outputBinaryFile.write(reinterpret_cast<char*>(&movie.place), sizeof(int));
+		outputBinaryFile.write(reinterpret_cast<char*>(&movie.noConsumables), sizeof(int));
+		for (int i = 0; i < movie.noConsumables; i++) {
+			outputBinaryFile.write(reinterpret_cast<char*>(&movie.Consumables[i]), sizeof(int));
+		}
+		outputBinaryFile.close();
+	}
 }
 
 int Theater::MAXPLACE = 20;
@@ -207,6 +231,14 @@ void operator>>(istream& console, Theater& theater) {
 		cout << "No such Place";
 		exit(EXIT_FAILURE);
 	}
+	ofstream outputBinaryFile("TheaterData.bin", ios::out | ios::binary | ios::app);
+
+	if (outputBinaryFile.is_open()) {
+		outputBinaryFile.write(theater.type.c_str(), theater.type.size() + 1);
+		outputBinaryFile.write(reinterpret_cast<char*>(&theater.row), sizeof(int));
+		outputBinaryFile.write(reinterpret_cast<char*>(&theater.place), sizeof(int));
+		outputBinaryFile.close();
+	}
 }
 
 
@@ -257,7 +289,7 @@ void operator>>(istream& console, Theater& theater) {
 		else {
 			cout << endl << "Ticket with ID: " << th2.getRandomId() << " is not for a Box seat";
 		}*/
-		Football football;
+		/*Football football;
 		Movie movie;
 		Theater theater;
 		cout << football.matchInfo() << endl;
@@ -268,5 +300,68 @@ void operator>>(istream& console, Theater& theater) {
 		cout << movie;
 		cout << theater.playInfo() << endl;
 		cin >> theater;
-		cout << theater;
+		cout << theater;*/
+
+		/*int consumable[] = { 1,2 };
+
+		Movie  movie;
+		movie.setTNoConsumables(2);
+		movie.addConsumable(consumable);
+		cout << movie.getConsumables();*/
+		
+		/*fstream file;
+		ifstream inputFile("TheaterTicket.txt", ios::in);
+		if (inputFile.is_open()) {
+			string type;
+			inputFile >> type;
+			int row;
+			inputFile >> row;
+			int place;
+			inputFile >> place;
+			Theater theater;
+			theater.setTicket(type, row, place);
+			cout << theater;
+			inputFile.close();
+		}*/
+		/*fstream file;
+		ifstream inputFile("MovieTicket.txt", ios::in);
+		if (inputFile.is_open()) {
+			string type;
+			inputFile >> type;
+			int row;
+			inputFile >> row;
+			int place;
+			inputFile >> place;
+			int noConsumables;
+			inputFile >> noConsumables;
+			int* consumables = new int[noConsumables];
+			for (int i = 0; i < noConsumables; i++) {
+				inputFile >> consumables[i];
+			}
+			Movie movie;
+			movie.setTicket(type, row, place, noConsumables, consumables, sizeof(consumables) / sizeof(consumables[0]));
+			cout << movie;
+			inputFile.close();
+		}*/
+		fstream file;
+		ifstream inputFile("FootballTicket.txt", ios::in);
+		if (inputFile.is_open()) {
+			int stand;
+			inputFile >> stand;
+			int row;
+			inputFile >> row;
+			int place;
+			inputFile >> place;
+			char* team = new char[1];
+			for (int i = 0; i < 1; i++) {
+				inputFile >> team[i];
+			}
+			Football football;
+			football.setTicket(stand, row, place, team);
+			cout << football;
+			inputFile.close();
+		}
+		
+		return 0;
 	}
+	

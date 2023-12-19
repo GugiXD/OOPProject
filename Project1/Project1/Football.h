@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 class Football {
 	int id = 0000;
@@ -56,6 +57,17 @@ public:
 		}
 		else {
 			this->supportingTeam = nullptr;
+		}
+		ofstream outputBinaryFile("FootballData.bin", ios::out | ios::binary | ios::app);
+
+		if (outputBinaryFile.is_open()) {
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->stand), sizeof(int));
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->row), sizeof(int));
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->place), sizeof(int));
+			for (int i = 0; i <1; i++) {
+				outputBinaryFile.write(this->supportingTeam, strlen(this->supportingTeam)+1);
+			}
+			outputBinaryFile.close();
 		}
 	}
 

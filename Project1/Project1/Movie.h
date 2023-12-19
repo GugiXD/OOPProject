@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 class Movie {
 	int id = 0000;
@@ -59,6 +60,18 @@ public:
 						throw exception("Wrong consumable");
 					}
 				}
+		}
+		ofstream outputBinaryFile("MovieData.bin", ios::out | ios::binary | ios::app);
+
+		if (outputBinaryFile.is_open()) {
+			outputBinaryFile.write(this->type.c_str(), this->type.size() + 1);
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->row), sizeof(int));
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->place), sizeof(int));
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->noConsumables), sizeof(int));
+			for (int i=0; i < noConsumables; i++) {
+				outputBinaryFile.write(reinterpret_cast<char*>(&this->Consumables[i]), sizeof(int));
+			}
+			outputBinaryFile.close();
 		}
 	}
 

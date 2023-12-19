@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 class Theater {
 	int id = 0000;
@@ -35,6 +36,14 @@ public:
 		}
 		else {
 			throw exception("No such Place");
+		}
+		ofstream outputBinaryFile("TheaterData.bin", ios::out | ios::binary | ios::app);
+
+		if (outputBinaryFile.is_open()) {
+			outputBinaryFile.write(this->type.c_str(), this->type.size() + 1);  
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->row), sizeof(int));
+			outputBinaryFile.write(reinterpret_cast<char*>(&this->place), sizeof(int));
+			outputBinaryFile.close();
 		}
 	}
 
@@ -174,3 +183,5 @@ public:
 	}
 
 };
+
+
