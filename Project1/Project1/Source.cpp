@@ -5,8 +5,11 @@ using namespace std;
 #include "Football.h"
 #include "Movie.h"
 #include "Theater.h"
+#include "FootballPremium.h"
+#include "TheaterWithParking.h"
+#include "Ticket.h"
 
-
+int FootballPremium::PREMROW = 0;
 int Football::MAXPLACE = 20;
 int Football::MAXROW = 5;
 int Football::MAXSTAND = 2;
@@ -189,6 +192,9 @@ string Theater::CATEGORY2 = "Category_2";
 int Theater::MINROW = 1;
 string Theater::CATEGORY3 = "Box";
 
+int TheaterWithParking::MINPARKING = 1;
+int TheaterWithParking::MAXPARKING = 30;
+
 void operator<<(ostream& console, Theater& theater) {
 	console << "INFO:" << " " << Theater::playInfo() << endl;
 	console << endl << ".........................................................";
@@ -343,7 +349,7 @@ void operator>>(istream& console, Theater& theater) {
 			cout << movie;
 			inputFile.close();
 		}*/
-		fstream file;
+		/*fstream file;
 		ifstream inputFile("FootballTicket.txt", ios::in);
 		if (inputFile.is_open()) {
 			int stand;
@@ -360,7 +366,7 @@ void operator>>(istream& console, Theater& theater) {
 			football.setTicket(stand, row, place, team);
 			cout << football;
 			inputFile.close();
-		}
+		}*/
 		
 		return 0;
 	}

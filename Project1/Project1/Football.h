@@ -2,8 +2,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "Ticket.h"
 using namespace std;
-class Football {
+class Football : public Ticket {
+protected:
 	int id = 0000;
 	int price = 15000;
 	int bets[5] = { 100, 200, 300, 400, 500 };
@@ -22,7 +24,7 @@ class Football {
 	static char TEAM1;
 	static char TEAM2;
 public:
-	void setTicket(int STAND, int ROW, int PLACE, char* TEAM) {
+	virtual void setTicket(int STAND, int ROW, int PLACE, char* TEAM) {
 		if (STAND >= Football::MINSTAND && STAND <= Football::MAXSTAND) {
 			this->stand = STAND;
 		}
@@ -71,7 +73,7 @@ public:
 		}
 	}
 
-	void setTSupportingTeam(char* TEAM) {
+	virtual void setTSupportingTeam(char* TEAM) {
 		if (TEAM != nullptr) {
 			if (TEAM[0] == Football::TEAM1 || TEAM[0] == Football::TEAM2) {
 				this->supportingTeam = new char[teamsSize + 1];

@@ -2,8 +2,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "Ticket.h"
 using namespace std;
-class Theater {
+class Theater : public Ticket {
+protected:
 	int id = 0000;
 	string type = "Category_1";
 	int row = 0;
@@ -16,7 +18,7 @@ class Theater {
 	static int MINPLACE;
 	static int MAXPLACE;
 public:
-	void setTicket(string TYPE, int ROW, int PLACE) {
+	virtual void setTicket(string TYPE, int ROW, int PLACE) {
 		if (TYPE == Theater::CATEGORY1 || TYPE == Theater::CATEGORY2 || TYPE == Theater::CATEGORY3) {
 			this->type = TYPE;
 		}
@@ -121,7 +123,7 @@ public:
 		return this->id;
 	}
 
-	void getInfo() {
+	virtual void getInfo() {
 		cout << endl << "Ticket category:";
 		string TYPE;
 		cin >> TYPE;

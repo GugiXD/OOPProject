@@ -2,8 +2,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "Ticket.h"
 using namespace std;
-class Movie {
+class Movie : public Ticket {
+protected:
 	int id = 0000;
 	int* Consumables = nullptr;
 	int noConsumables = 0;
@@ -19,7 +21,8 @@ class Movie {
 	static int CONSUMABLE1;
 	static int CONSUMABLE2;
 public:
-	void setTicket(string TYPE, int ROW, int PLACE, int NOCONSUMABLES, int* CONSUMABLES, int CONSUMABLES_SIZE) {
+
+	 virtual void setTicket(string TYPE, int ROW, int PLACE, int NOCONSUMABLES, int* CONSUMABLES, int CONSUMABLES_SIZE) {
 		if (TYPE == Movie::TYPE1 || TYPE == Movie::TYPE2) {
 			this->type = TYPE;
 		}
@@ -265,7 +268,7 @@ public:
 	}
 
 
-	void printInfo() {
+	virtual void printInfo() {
 		cout << endl << ".......................................";
 		cout << endl << this->type;
 		cout << endl << this->row;
