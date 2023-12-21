@@ -88,5 +88,13 @@ public:
     int getParkingSpace() const {
         return parkingSpace;
     }
+
+	int generateParking() {
+		this->parkingSpace = 1 + rand() % 30;
+		return this->parkingSpace;
+	}
+
+	friend void operator>>(istream& console, TheaterWithParking& theater);
+	friend void operator<<(ostream& console, TheaterWithParking& theater);
 };
 

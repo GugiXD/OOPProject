@@ -141,7 +141,7 @@ public:
 		return this->id;
 	}
 
-	static string movieInfo() {
+	virtual string movieInfo() {
 		return "Consumables: 1)Popcorn 2)Nachos   Rows: 5; Seats : 100; Movie: Five Nights at Freddy's; Date: 11/23/2023; Time: 16:00";
 	}
 

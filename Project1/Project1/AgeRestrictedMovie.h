@@ -9,6 +9,10 @@ public:
     AgeRestrictedMovie() : Movie(), hasAgeRestriction(true) {
     }
 
+	static string movieInfo() {
+		return "Consumables: 1)Popcorn 2)Nachos   Rows: 5; Seats : 100; Movie: The Nun II; Date: 02/03/2024; Time: 13:00";
+	}
+
     void setTicket(string TYPE, int ROW, int PLACE, int NOCONSUMABLES, int* CONSUMABLES, int CONSUMABLES_SIZE) {
 		if (TYPE == Movie::TYPE1 || TYPE == Movie::TYPE2) {
 			this->type = TYPE;
@@ -86,6 +90,8 @@ public:
     bool getRestriction() const {
         return hasAgeRestriction;
     }
+
+	friend void operator>>(istream& console, AgeRestrictedMovie& movie);
  
 };
 

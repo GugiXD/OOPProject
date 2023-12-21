@@ -81,8 +81,10 @@ public:
         return premiumPrice;
     }
 
-    int getExtraBet(int index) const {
+	int getExtraBet(int index) const {
         return extraBets[index];
     }
+	friend void operator>>(istream& console, FootballPremium& football);
+	friend void operator<<(ostream& console, FootballPremium& football);
 };
 

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 #include "Ticket.h"
 using namespace std;
 class Theater : public Ticket {
@@ -17,6 +18,7 @@ protected:
 	static int MAXROW;
 	static int MINPLACE;
 	static int MAXPLACE;
+	std::vector<string> upcomingPlays;
 public:
 	virtual void setTicket(string TYPE, int ROW, int PLACE) {
 		if (TYPE == Theater::CATEGORY1 || TYPE == Theater::CATEGORY2 || TYPE == Theater::CATEGORY3) {
@@ -39,6 +41,11 @@ public:
 		else {
 			throw exception("No such Place");
 		}
+
+		upcomingPlays.push_back("What the Butler Saw (Date: 11/27/2023)");
+		upcomingPlays.push_back("Death of a Salesman (Date not revealed)");
+		upcomingPlays.push_back("Waiting for Godot (Date not revealed)");
+
 		ofstream outputBinaryFile("TheaterData.bin", ios::out | ios::binary | ios::app);
 
 		if (outputBinaryFile.is_open()) {
@@ -107,7 +114,7 @@ public:
 		return "Rows: 5; Seats: 100; Play: What the Butler Saw; Date: 11/27/2023; Time: 12:00";
 	}
 
-	string getTType() {
+	string getType() {
 		return this->type;
 	}
 
@@ -165,6 +172,7 @@ public:
 		cout << endl << ".......................................";
 	};
 	friend void operator>>(istream& console, Theater& theater);
+	friend void operator<<(ostream& console, Theater& theater);
 
 	bool operator>=(Theater& theater) {
 		if (this->row >= theater.row) {
