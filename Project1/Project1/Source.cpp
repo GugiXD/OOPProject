@@ -316,7 +316,7 @@ void operator>>(istream& console, AgeRestrictedMovie& movie) {
 		for (int i = 0; i < movie.noConsumables; ++i) {
 			cout << "Enter a consumable (enter 1 popcorn, or 2 for nachos):";
 			int consumable;
-			cin >> consumable;
+			console >> consumable;
 			if (consumable == Movie::CONSUMABLE1 || consumable == Movie::CONSUMABLE2) {
 				movie.Consumables[i] = consumable;
 			}
