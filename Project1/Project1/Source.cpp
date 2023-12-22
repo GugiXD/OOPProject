@@ -201,10 +201,10 @@ void operator<<(ostream& console, Movie& movie) {
 		int* consumables = movie.getConsumables();
 		console << endl << "Consumables:" << " ";
 		for (int i = 0; i < movie.getNoConsumablers(); i++) {
-			if (consumables[i] = 1) {
+			if (consumables[i] == 1) {
 				console << "popcorn" << " ";
 			}
-			else if (consumables[i] = 1) {
+			else if (consumables[i] == 2) {
 				console << "nachos" << " ";
 			}
 		}
@@ -254,7 +254,7 @@ void operator>>(istream& console, Movie& movie) {
 		for (int i = 0; i < movie.noConsumables; ++i) {
 			cout << "Enter a consumable (enter 1 popcorn, or 2 for nachos):";
 			int consumable;
-			cin >> consumable;
+			console >> consumable;
 			if (consumable == Movie::CONSUMABLE1 || consumable == Movie::CONSUMABLE2) {
 				movie.Consumables[i] = consumable;
 			}
@@ -350,10 +350,10 @@ void operator<<(ostream& console, AgeRestrictedMovie& movie) {
 		int* consumables = movie.getConsumables();
 		console << endl << "Consumables:" << " ";
 		for (int i = 0; i < movie.getNoConsumablers(); i++) {
-			if (consumables[i] = 1) {
+			if (consumables[i] == 1) {
 				console << "popcorn" << " ";
 			}
-			else if (consumables[i] = 1) {
+			else if (consumables[i] == 2) {
 				console << "nachos" << " ";
 			}
 		}
@@ -506,13 +506,93 @@ void chooseFootball(int choice) {
 		cout << endl << "You selected the Premium Ticket." << endl;
 		cin >> footballp;
 		cout << footballp;
-		exit(0); 
+		cout << endl << "Would you like to see a specific bet? (type 1 if yes, 0 if no)";
+		int var;
+		cin >> var;
+		if (var == 1) {
+			cout << "Select witch one (1-5):";
+			int a;
+			cin >> a;
+			if (a < 6 && a> 0) {
+				cout << endl << "Bet " << a << " is: " << football[a - 1] << " lei";
+				cout << endl << "Would you like to see a specific premium bet? (type 1 if yes, 0 if no)";
+				int var2;
+				cin >> var2;
+				if (var == 1) {
+					cout << "Select witch one (1-5):";
+					int a;
+					cin >> a;
+					if (a < 6 && a> 0) {
+						cout << endl << "Bet " << a << " is: " << footballp.getExtraBet(a-1) << " lei";
+						exit(0);
+					}
+					else {
+						cout << "No such bet";
+						exit(EXIT_FAILURE);
+					}
+				}
+				else if (var == 0) {
+					exit(0);
+				}
+				else {
+					exit(0);
+				}
+			}
+			else {
+				cout << "No such bet";
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (var == 0) {
+			cout << endl << "Would you like to see a specific premium bet? (type 1 if yes, 0 if no)";
+			int var2;
+			cin >> var2;
+			if (var2 == 1) {
+				cout << "Select witch one (1-5):";
+				int a;
+				cin >> a;
+				if (a < 6 && a> 0) {
+					cout << endl << "Bet " << a << " is: " << footballp.getExtraBet(a - 1) << " lei";
+					exit(0);
+				}
+				else {
+					cout << "No such bet";
+					exit(EXIT_FAILURE);
+				}
+			}else if (var2 == 0) {
+				exit(0);
+			}
+			else {
+				exit(0);
+			}
+		}
+		else {
+			exit(0);
+		}
 	}
 	else if (choice == 2) {
 		cout << endl << "You selected the normal ticket." << endl;
 		cin >> football;
 		cout << football;
-		exit(0);
+		cout << endl << "Would you like to see a specific bet? (type 1 if yes, 0 if no)";
+		int var;
+		cin >> var;
+		if (var == 1) {
+			cout << "Select witch one (1-5):";
+			int a;
+			cin >> a;
+			if (a < 6 && a> 0) {
+				cout << endl << "Bet " << a << " is: " << football[a-1] << " lei";
+				exit(0);
+			}
+			else {
+				cout << "No such bet";
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (var == 0) {
+			exit(0);
+		}
 	}
 	else if (choice == 0) {
 		cout << endl << "Exiting aplication." << endl;
@@ -640,7 +720,9 @@ void chooseTicket() {
 	}
 }
 
-	int main() {
+	int main(int argc, char* argv[]) {
+		
+		
 		while (true) {
 			chooseTicket();
 		}
@@ -801,6 +883,29 @@ void chooseTicket() {
 			football.setTicket(stand, row, place, team);
 			cout << football;
 			inputFile.close();
+		}*/
+
+
+		/*char team[] = { 'A' };
+		if (argc == 2) {
+			ifstream inputFile(argv[1]);
+
+			if (!inputFile.is_open()) {
+				cerr << "Error opening file: " << argv[1] << endl;
+				return 1;
+			}
+			string line;
+			while (getline(inputFile, line)) {
+				 Football football;
+				 football.setTicket(1,1,1,team);
+			}
+
+			inputFile.close();
+		}
+		else {
+			while (true) {
+				chooseTicket();
+			}
 		}*/
 		
 		return 0;
