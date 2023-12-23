@@ -65,6 +65,7 @@ void operator>>(istream& console, Football& football) {
 		cout << "No such Place";
 		exit(EXIT_FAILURE);
 	}
+	football.generateRandomID();
 	ofstream outputBinaryFile("FootballData.bin", ios::out | ios::binary | ios::app);
 
 	if (outputBinaryFile.is_open()) {
@@ -74,6 +75,7 @@ void operator>>(istream& console, Football& football) {
 		for (int i = 0; i < 1; i++) {
 			outputBinaryFile.write(football.supportingTeam, strlen(football.supportingTeam)+1);
 		}
+		
 		outputBinaryFile.close();
 	}
 }
@@ -89,7 +91,7 @@ void operator<<(ostream& console, Football& football) {
 	console << endl << "Stand:" << football.getStand();
 	console << endl << "Row:" << football.getRow();
 	console << endl << "Place:" << football.getPlace();
-	console << endl << "ID:" << football.generateRandomID();
+	console << endl << "ID:" << football.getRandomId();
 	console << endl << "Available bets:";
 	for (int i = 0; i < 5; i++) {
 		cout << " " << football[i] << " lei";
@@ -144,6 +146,7 @@ void operator>>(istream& console, FootballPremium& football) {
 		cout << "No such Place";
 		exit(EXIT_FAILURE);
 	}
+	football.generateRandomID();
 	ofstream outputBinaryFile("FootballData.bin", ios::out | ios::binary | ios::app);
 
 	if (outputBinaryFile.is_open()) {
@@ -168,7 +171,7 @@ void operator<<(ostream& console, FootballPremium& football) {
 	console << endl << "Stand:" << football.getStand();
 	console << endl << "Row:" << football.getRow();
 	console << endl << "Place:" << football.getPlace();
-	console << endl << "ID:" << football.generateRandomID();
+	console << endl << "ID:" << football.getRandomId();
 	console << endl << "Available bets:";
 	for (int i = 0; i < 5; i++) {
 		cout << " " << football[i] << " lei";
@@ -212,7 +215,7 @@ void operator<<(ostream& console, Movie& movie) {
 	else {
 		cout << endl << "No consumables";
 	}
-	console << endl << "ID:" << movie.generateRandomID();
+	console << endl << "ID:" << movie.getRandomId();
 	console << endl << ".........................................................";
 }
 
@@ -264,6 +267,7 @@ void operator>>(istream& console, Movie& movie) {
 			}
 		}
 	}
+	movie.generateRandomID();
 	ofstream outputBinaryFile("MovieData.bin", ios::out | ios::binary | ios::app);
 
 	if (outputBinaryFile.is_open()) {
@@ -326,6 +330,7 @@ void operator>>(istream& console, AgeRestrictedMovie& movie) {
 			}
 		}
 	}
+	movie.generateRandomID();
 	ofstream outputBinaryFile("MovieData.bin", ios::out | ios::binary | ios::app);
 
 	if (outputBinaryFile.is_open()) {
@@ -361,7 +366,7 @@ void operator<<(ostream& console, AgeRestrictedMovie& movie) {
 	else {
 		cout << endl << "No consumables";
 	}
-	console << endl << "ID:" << movie.generateRandomID();
+	console << endl << "ID:" << movie.getRandomId();
 	console << endl << ".........................................................";
 }
 
@@ -382,7 +387,7 @@ void operator<<(ostream& console, Theater& theater) {
 	console << endl << "Ticket category:" << theater.getType();
 	console << endl << "Row:" << theater.getRow();
 	console << endl << "Place:" << theater.getPlace();
-	console << endl << "ID:" << theater.generateRandomID();
+	console << endl << "ID:" << theater.getRandomId();
 	console << endl << ".........................................................";
 	console << endl << "List of plays that you can watch at our theater:";
 	for (const string& play : theater.upcomingPlays) {
@@ -423,7 +428,7 @@ void operator>>(istream& console, Theater& theater) {
 		cout << "No such Place";
 		exit(EXIT_FAILURE);
 	}
-
+	theater.generateRandomID();
 	theater.upcomingPlays.push_back("What the Butler Saw (Date: 11/27/2023)");
 	theater.upcomingPlays.push_back("Death of a Salesman (Date not revealed)");
 	theater.upcomingPlays.push_back("Waiting for Godot (Date not revealed)");
@@ -469,7 +474,7 @@ void operator>>(istream& console, TheaterWithParking& theater) {
 		cout << "No such Place";
 		exit(EXIT_FAILURE);
 	}
-
+	theater.generateRandomID();
 	theater.upcomingPlays.push_back("What the Butler Saw (Date: 11/27/2023)");
 	theater.upcomingPlays.push_back("Death of a Salesman (Date not revealed)");
 	theater.upcomingPlays.push_back("Waiting for Godot (Date not revealed)");
@@ -490,7 +495,7 @@ void operator<<(ostream& console, TheaterWithParking& theater) {
 	console << endl << "Row:" << theater.getRow();
 	console << endl << "Place:" << theater.getPlace();
 	console << endl << "ID:" << theater.generateRandomID();
-	console << endl << "Parking space:" << theater.generateParking();
+	console << endl << "Parking space:" << theater.getRandomId();
 	console << endl << ".........................................................";
 	console << endl << "List of plays that you can watch at our theater:";
 	for (const string& play : theater.upcomingPlays) {

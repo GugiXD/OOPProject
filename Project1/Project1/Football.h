@@ -234,7 +234,9 @@ public:
 		}
 		else {
 			for (int i = 0; i < 1; ++i) {
-				cout << supportingTeam[i] << " ";
+				if (supportingTeam[i] != '\0') {
+					cout << supportingTeam[i] << " ";
+				}
 			}
 		}
 		cout << endl << this->generateRandomID();
